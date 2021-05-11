@@ -1,7 +1,7 @@
 package com.annchar.coinranking.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.annchar.coinranking.R
 
 class MainActivity : AppCompatActivity() {

@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.annchar.coinranking.BR
-import org.koin.android.viewmodel.compat.ScopeCompat.viewModel
 
 abstract class BaseFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel> : Fragment() {
     protected abstract val viewModel: ViewModel
