@@ -1,0 +1,55 @@
+package com.annchar.coinranking.data.pagingsources
+
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
+import com.annchar.coinranking.base.ApiResponse
+import com.annchar.coinranking.data.repository.CryptoRepository
+import com.annchar.coinranking.models.CryptoItemResponse
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+
+const val NETWORK_PAGE_SIZE = 50
+private const val INITIAL_LOAD_SIZE = 1
+
+class CryptoListPagingSource(private val repository: CryptoRepository) : PagingSource<Int, CryptoItemResponse>() {
+
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CryptoItemResponse> {
+        // Start refresh at page 1 if undefined.
+        val position = params.key ?: INITIAL_LOAD_SIZE
+        val offset = if (params.key != null) ((position - 1) * NETWORK_PAGE_SIZE) + 1 else INITIAL_LOAD_SIZE
+        val response = withContext(Dispatchers.IO) {
+            repository.getCryptoList(start = offset, limit = params.loadSize)
+        }
+        return when (response) {
+            is ApiResponse.Success -> {
+                val nextKey = if (response.data.isEmpty()) {
+                    null
+                } else {
+                    // initial load size = 3 * NETWORK_PAGE_SIZE
+                    // ensure we're not requesting duplicating items, at the 2nd request
+                    position + (params.loadSize / NETWORK_PAGE_SIZE)
+                }
+                return LoadResult.Page(
+                    data = response.data,
+                    prevKey = null, // Only paging forward.
+                    // assume that if a full page is not loaded, that means the end of the data
+                    nextKey = nextKey
+                )
+            }
+            is ApiResponse.Error -> {
+                val message = response.error.message
+                LoadResult.Error(Throwable(message))
+            }
+            is ApiResponse.NetworkError -> {
+                LoadResult.Error(response.exception)
+            }
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, CryptoItemResponse>): Int? {
+        // We need to get the previous key (or next key if previous is null) of the page
+        // that was closest to the most recently accessed index.
+        // Anchor position is the most recently accessed index
+        return null
+    }
+}

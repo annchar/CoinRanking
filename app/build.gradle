@@ -91,6 +91,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
 
+    // Paging
+    implementation 'androidx.paging:paging-runtime-ktx:3.0.0'
+
 }
 
 def getProperty(String filename, String propName) {

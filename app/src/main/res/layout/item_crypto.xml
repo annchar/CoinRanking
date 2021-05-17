@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="cryptoItem"
+            type="com.annchar.coinranking.models.CryptoItemResponse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/tv_symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.CoinRankingStyles.Subtitle2"
+            android:textColor="@color/black"
+            android:text="@{cryptoItem.symbol}"
+            app:layout_constraintEnd_toStartOf="@+id/tv_currency"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="BTC" />
+
+        <TextView
+            android:id="@+id/tv_currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/usdt_unit"
+            android:textAppearance="@style/TextAppearance.CoinRankingStyles.Overline"
+            android:textColor="@color/gray_800"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_symbol"
+            app:layout_constraintStart_toEndOf="@+id/tv_symbol"
+            app:layout_constraintTop_toTopOf="@+id/tv_symbol"
+            tools:text="/USDT" />
+
+        <TextView
+            android:id="@+id/tv_volume"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{@string/volume(cryptoItem.volumeDisplay)}"
+            android:textAppearance="@style/TextAppearance.CoinRankingStyles.Caption"
+            android:textColor="@color/gray_800"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline1"
+            app:layout_constraintStart_toStartOf="@+id/tv_symbol"
+            app:layout_constraintTop_toBottomOf="@+id/tv_symbol"
+            tools:text="Vol 3.49B" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{cryptoItem.priceDisplayNoComma}"
+            android:textAppearance="@style/TextAppearance.CoinRankingStyles.Subtitle2"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="56207.61" />
+
+        <TextView
+            android:id="@+id/tv_price_dollars"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{@string/dollar_price(cryptoItem.priceDisplay)}"
+            android:textAppearance="@style/TextAppearance.CoinRankingStyles.Caption"
+            android:textColor="@color/gray_800"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/tv_price"
+            app:layout_constraintTop_toBottomOf="@+id/tv_price"
+            tools:text="฿1,757,261.75" />
+
+        <TextView
+            android:id="@+id/tv_percent_change"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@{cryptoItem.percentChange24h > 0 ? @drawable/border_green : @drawable/border_red}"
+            android:gravity="center"
+            android:text="@{cryptoItem.percentChange24h > 0 ? @string/percent_up(cryptoItem.percentChangeDisplay) : @string/percent_down(cryptoItem.percentChangeDisplay)}"
+            android:textAppearance="@style/TextAppearance.CoinRankingStyles.Body2"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="0.25%" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

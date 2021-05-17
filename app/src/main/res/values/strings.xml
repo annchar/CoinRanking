@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">CoinRanking</string>
+    <string name="data_empty">Data Empty</string>
+    <string name="usdt_unit">/USDT</string>
+    <string name="volume">Vol(24h) $%1$s</string>
+    <string name="percent_up">+%1$s%%</string>
+    <string name="percent_down">%1$s%%</string>
+    <string name="dollar_price">$%1$s</string>
+    <string name="fab_content_desc">upward</string>
+    <string name="search">Search</string>
+    <string name="content_description_search">Search</string>
+    <string name="spot_feature">Spot Feature</string>
+    <string name="name_column">Name</string>
+    <string name="vol_column">/Vol</string>
+    <string name="last_price_column">Last Price</string>
+    <string name="percent_change_column">24h Chg</string>
+    <string name="warning_available_soon">Available soon…</string>
+    <string name="item_clicked">%1$s Clicked</string>
 </resources>

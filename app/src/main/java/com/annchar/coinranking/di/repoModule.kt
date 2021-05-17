@@ -5,5 +5,5 @@ import com.annchar.coinranking.data.repository.CryptoRepositoryImpl
 import org.koin.dsl.module
 
 val repoModule = module {
-    single<CryptoRepository> { CryptoRepositoryImpl(get()) }
+    single<CryptoRepository> { CryptoRepositoryImpl(get(), get()) }
 }

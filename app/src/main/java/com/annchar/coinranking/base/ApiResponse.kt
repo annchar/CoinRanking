@@ -23,12 +23,14 @@ package com.annchar.coinranking.base
 sealed class ApiResponse<out R> {
 
     data class Success<out T>(val data: T) : ApiResponse<T>()
-    data class Error(val exception: Exception) : ApiResponse<Nothing>()
+    data class Error(val code: Int? = null, val exception: Exception, val error: ErrorResponse) : ApiResponse<Nothing>()
+    data class NetworkError(val exception: Exception, val error: ErrorResponse) : ApiResponse<Nothing>()
 
     override fun toString(): String {
         return when (this) {
             is Success<*> -> "Success[data=$data]"
-            is Error -> "Error[exception=$exception]"
+            is Error -> "Error[exception=$error]"
+            is NetworkError -> "Network Error[exception=$error]"
         }
     }
 }

@@ -5,6 +5,5 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class CryptoListJson(
-    @Json(name = "data") val data: List<CryptoItemJson>? = emptyList(),
-    @Json(name = "status") val status: StatusJson
+    @Json(name = "data") val data: List<CryptoItemJson>? = emptyList()
 )

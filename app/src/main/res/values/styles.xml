@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppFloatingActionButton" parent="Widget.Design.FloatingActionButton">
+        <item name="android:backgroundTint">@color/yellow_600</item>
+        <item name="android:layout_margin">@dimen/fab_padding</item>
+        <item name="android:layout_gravity">bottom|end</item>
+        <item name="borderWidth">0dp</item>
+        <item name="tint">@color/white</item>
+    </style>
+
+    <style name="AppToolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="titleTextAppearance">@style/TextAppearance.CoinRankingStyles.Headline6</item>
+        <item name="titleTextColor">@color/black</item>
+    </style>
+
+</resources>
