@@ -1,14 +1,16 @@
-package com.annchar.coinranking.base
+package com.annchar.coinranking.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.annchar.coinranking.BR
+
 
 abstract class BaseFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel> : Fragment() {
     protected abstract val viewModel: ViewModel
@@ -28,6 +30,11 @@ abstract class BaseFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        init()
+    }
+
     /**
      * Get layout resource id which inflate in onCreateView.
      */
@@ -36,9 +43,7 @@ abstract class BaseFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel
 
     abstract fun init()
 
-    override fun onStart() {
-        super.onStart()
-        init()
-        // TODO: hideSoftKeyboard()
+    protected open fun showToastMessage(message: String?) {
+        Toast.makeText(requireActivity(), message, Toast.LENGTH_LONG).show()
     }
 }

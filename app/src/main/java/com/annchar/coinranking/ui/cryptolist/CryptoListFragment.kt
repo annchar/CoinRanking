@@ -3,19 +3,22 @@ package com.annchar.coinranking.ui.cryptolist
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.annchar.coinranking.R
-import com.annchar.coinranking.base.BaseFragment
 import com.annchar.coinranking.databinding.FragmentCryptoListBinding
+import com.annchar.coinranking.ui.base.BaseFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class CryptoListFragment : BaseFragment<FragmentCryptoListBinding, CryptoListViewModel>() {
+
+    companion object {
+        private const val START_POSITION = 0
+    }
 
     override val viewModel: CryptoListViewModel by viewModel()
 
@@ -36,7 +39,7 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding, CryptoListVie
         when (item.itemId) {
             R.id.search -> {
                 // TODO: Add search feature
-                showToast(getString(R.string.warning_available_soon))
+                showToastMessage(getString(R.string.warning_available_soon))
                 return true
             }
         }
@@ -45,7 +48,7 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding, CryptoListVie
 
     private val cryptoListAdapter by lazy {
         CryptoListAdapter {
-            showToast(getString(R.string.item_clicked, it.symbol))
+            showToastMessage(getString(R.string.item_clicked, it.symbol))
         }
     }
 
@@ -86,23 +89,22 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding, CryptoListVie
                     else -> null
                 }
                 errorState?.let {
-                    showToast(it.error.message.toString())
+                    showToastMessage(it.error.message.toString())
                 }
             }
         }
 
         binding.rcCryptoList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                binding.fab.isVisible = dy < 0
+                binding.fab.isVisible = dy < START_POSITION
 
-                val scrollPosition =
-                    (binding.rcCryptoList.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                binding.refreshLayout.isEnabled = scrollPosition == 0
+                val scrollPosition = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                binding.refreshLayout.isEnabled = scrollPosition == START_POSITION
             }
         })
 
         binding.fab.setOnClickListener {
-            binding.rcCryptoList.smoothScrollToPosition(0)
+            binding.rcCryptoList.smoothScrollToPosition(START_POSITION)
         }
 
         binding.refreshLayout.setOnRefreshListener {
@@ -118,10 +120,6 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding, CryptoListVie
         viewModel.loading.observe(viewLifecycleOwner, { isLoading ->
             handleLoading(isLoading)
         })
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     private fun handleLoading(loading: Boolean?) {

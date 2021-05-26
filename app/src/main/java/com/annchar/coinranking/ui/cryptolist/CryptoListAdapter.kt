@@ -10,7 +10,8 @@ import com.annchar.coinranking.R
 import com.annchar.coinranking.databinding.ItemCryptoBinding
 import com.annchar.coinranking.models.CryptoItemResponse
 
-class CryptoListAdapter(private val cryptoClickListener: (cryptoItem: CryptoItemResponse) -> Unit) : PagingDataAdapter<CryptoItemResponse, CryptoListAdapter.ViewHolder>(DiffUtilCallBack) {
+class CryptoListAdapter(private val cryptoClickListener: (cryptoItem: CryptoItemResponse) -> Unit) :
+    PagingDataAdapter<CryptoItemResponse, CryptoListAdapter.ViewHolder>(DiffUtilCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = DataBindingUtil.inflate<ItemCryptoBinding>(
@@ -29,6 +30,7 @@ class CryptoListAdapter(private val cryptoClickListener: (cryptoItem: CryptoItem
     inner class ViewHolder(private val binding: ItemCryptoBinding) : RecyclerView.ViewHolder(binding.root) {
 
         private val context = binding.root.context
+
         init {
             binding.root.setOnClickListener {
                 val cryptoItem = getItem(absoluteAdapterPosition)

@@ -2,13 +2,10 @@ package com.annchar.coinranking.data.pagingsources
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.annchar.coinranking.base.ApiResponse
 import com.annchar.coinranking.data.repository.CryptoRepository
 import com.annchar.coinranking.models.CryptoItemResponse
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
-const val NETWORK_PAGE_SIZE = 50
+const val NETWORK_PAGE_SIZE = 500
 private const val INITIAL_LOAD_SIZE = 1
 
 class CryptoListPagingSource(private val repository: CryptoRepository) : PagingSource<Int, CryptoItemResponse>() {
@@ -17,32 +14,23 @@ class CryptoListPagingSource(private val repository: CryptoRepository) : PagingS
         // Start refresh at page 1 if undefined.
         val position = params.key ?: INITIAL_LOAD_SIZE
         val offset = if (params.key != null) ((position - 1) * NETWORK_PAGE_SIZE) + 1 else INITIAL_LOAD_SIZE
-        val response = withContext(Dispatchers.IO) {
-            repository.getCryptoList(start = offset, limit = params.loadSize)
-        }
-        return when (response) {
-            is ApiResponse.Success -> {
-                val nextKey = if (response.data.isEmpty()) {
-                    null
-                } else {
-                    // initial load size = 3 * NETWORK_PAGE_SIZE
-                    // ensure we're not requesting duplicating items, at the 2nd request
-                    position + (params.loadSize / NETWORK_PAGE_SIZE)
-                }
-                return LoadResult.Page(
-                    data = response.data,
-                    prevKey = null, // Only paging forward.
-                    // assume that if a full page is not loaded, that means the end of the data
-                    nextKey = nextKey
-                )
+        return try {
+            val response = repository.getCryptoList(start = offset, limit = params.loadSize)
+            val nextKey = if (response.isEmpty()) {
+                null
+            } else {
+                // initial load size = 3 * NETWORK_PAGE_SIZE
+                // ensure we're not requesting duplicating items, at the 2nd request
+                position + (params.loadSize / NETWORK_PAGE_SIZE)
             }
-            is ApiResponse.Error -> {
-                val message = response.error.message
-                LoadResult.Error(Throwable(message))
-            }
-            is ApiResponse.NetworkError -> {
-                LoadResult.Error(response.exception)
-            }
+            LoadResult.Page(
+                data = response,
+                prevKey = null, // Only paging forward.
+                // assume that if a full page is not loaded, that means the end of the data
+                nextKey = nextKey
+            )
+        } catch (e: Exception) {
+            LoadResult.Error(e)
         }
     }
 

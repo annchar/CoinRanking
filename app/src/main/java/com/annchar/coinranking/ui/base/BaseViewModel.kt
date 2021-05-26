@@ -1,4 +1,4 @@
-package com.annchar.coinranking.base
+package com.annchar.coinranking.ui.base
 
 import androidx.lifecycle.ViewModel
 

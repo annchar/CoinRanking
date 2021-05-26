@@ -2,6 +2,7 @@ package com.annchar.coinranking
 
 import android.app.Application
 import com.annchar.coinranking.di.apiServicesModule
+import com.annchar.coinranking.di.appModule
 import com.annchar.coinranking.di.mappersModule
 import com.annchar.coinranking.di.networkModule
 import com.annchar.coinranking.di.repoModule
@@ -21,7 +22,7 @@ class CoinRankingApplication : Application() {
         startKoin {
             androidLogger(Level.ERROR)
             androidContext(this@CoinRankingApplication)
-            modules(networkModule, repoModule, apiServicesModule, viewModelsModule, mappersModule)
+            modules(appModule, networkModule, repoModule, apiServicesModule, viewModelsModule, mappersModule)
         }
     }
 }
