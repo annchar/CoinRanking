@@ -11,7 +11,7 @@ private const val INITIAL_LOAD_SIZE = 1
 class CryptoListPagingSource(private val repository: CryptoRepository) : PagingSource<Int, CryptoItemResponse>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CryptoItemResponse> {
-        // Start refresh at page 1 if undefined.
+        // Start refresh at position 1 if undefined.
         val position = params.key ?: INITIAL_LOAD_SIZE
         val offset = if (params.key != null) ((position - 1) * NETWORK_PAGE_SIZE) + 1 else INITIAL_LOAD_SIZE
         return try {

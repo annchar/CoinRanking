@@ -16,4 +16,6 @@
     <string name="percent_change_column">24h Chg</string>
     <string name="warning_available_soon">Available soon…</string>
     <string name="item_clicked">%1$s Clicked</string>
+    <string name="no_results">No Results</string>
+    <string name="retry">retry</string>
 </resources>

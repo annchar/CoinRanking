@@ -21,11 +21,4 @@ class CryptoListViewModel(private val repository: CryptoRepository) : BaseViewMo
             .cachedIn(viewModelScope)
             .let { it as MutableLiveData<PagingData<CryptoItemResponse>> }
     val cryptoList: LiveData<PagingData<CryptoItemResponse>> = _cryptoList
-
-    private val _loading: MutableLiveData<Boolean> = MutableLiveData()
-    val loading: LiveData<Boolean> = _loading
-
-    fun setLoading(loading: Boolean) {
-        _loading.value = loading
-    }
 }

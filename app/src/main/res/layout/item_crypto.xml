@@ -82,6 +82,7 @@
             android:layout_height="wrap_content"
             android:background="@{cryptoItem.percentChange24h > 0 ? @drawable/border_green : @drawable/border_red}"
             android:gravity="center"
+            android:maxLines="1"
             android:text="@{cryptoItem.percentChange24h > 0 ? @string/percent_up(cryptoItem.percentChangeDisplay) : @string/percent_down(cryptoItem.percentChangeDisplay)}"
             android:textAppearance="@style/TextAppearance.CoinRankingStyles.Body2"
             android:textColor="@color/white"
@@ -103,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.75" />
+            app:layout_constraintGuide_percent="0.7" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
