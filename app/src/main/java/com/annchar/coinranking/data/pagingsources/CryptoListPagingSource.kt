@@ -2,13 +2,13 @@ package com.annchar.coinranking.data.pagingsources
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.annchar.coinranking.data.repository.CryptoRepository
-import com.annchar.coinranking.models.CryptoItemResponse
+import com.annchar.coinranking.data.repository.CryptoListRepository
+import com.annchar.coinranking.ui.models.CryptoItemResponse
 
 const val NETWORK_PAGE_SIZE = 500
 private const val INITIAL_LOAD_SIZE = 1
 
-class CryptoListPagingSource(private val repository: CryptoRepository) : PagingSource<Int, CryptoItemResponse>() {
+class CryptoListPagingSource(private val repository: CryptoListRepository) : PagingSource<Int, CryptoItemResponse>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CryptoItemResponse> {
         // Start refresh at position 1 if undefined.

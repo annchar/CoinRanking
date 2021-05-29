@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.annchar.coinranking.R
 import com.annchar.coinranking.databinding.ItemCryptoBinding
-import com.annchar.coinranking.models.CryptoItemResponse
+import com.annchar.coinranking.ui.models.CryptoItemResponse
 
 class CryptoListAdapter(private val cryptoClickListener: (cryptoItem: CryptoItemResponse) -> Unit) :
     PagingDataAdapter<CryptoItemResponse, CryptoListAdapter.ViewHolder>(DiffUtilCallBack) {

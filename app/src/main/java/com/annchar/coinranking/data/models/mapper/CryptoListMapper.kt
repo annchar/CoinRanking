@@ -1,9 +1,9 @@
 package com.annchar.coinranking.data.models.mapper
 
 import com.annchar.coinranking.data.models.CryptoItemJson
-import com.annchar.coinranking.models.CryptoItemResponse
+import com.annchar.coinranking.ui.models.CryptoItemResponse
 
-class CryptoMapper {
+class CryptoListMapper {
 
     fun toCryptoListResponse(json: List<CryptoItemJson>?): List<CryptoItemResponse> {
         with(json) {

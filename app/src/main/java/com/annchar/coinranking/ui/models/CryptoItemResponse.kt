@@ -1,11 +1,9 @@
-package com.annchar.coinranking.models
+package com.annchar.coinranking.ui.models
 
 import com.annchar.coinranking.extentions.toDecimals
 import com.annchar.coinranking.extentions.toDecimalsNoComma
 import com.annchar.coinranking.extentions.toDecimalsUnits
-import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
 data class CryptoItemResponse(
     val id: Int,
     val name: String,
