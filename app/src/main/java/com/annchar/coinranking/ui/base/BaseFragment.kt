@@ -30,8 +30,8 @@ abstract class BaseFragment<Binding : ViewDataBinding, ViewModel : BaseViewModel
         return binding.root
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         init()
     }
 
