@@ -11,8 +11,8 @@ import androidx.paging.liveData
 import com.annchar.coinranking.data.pagingsources.CryptoListPagingSource
 import com.annchar.coinranking.data.pagingsources.NETWORK_PAGE_SIZE
 import com.annchar.coinranking.data.repository.CryptoListRepository
-import com.annchar.coinranking.ui.models.CryptoItemResponse
 import com.annchar.coinranking.ui.base.BaseViewModel
+import com.annchar.coinranking.ui.models.CryptoItemResponse
 
 class CryptoListViewModel(private val repository: CryptoListRepository) : BaseViewModel() {
 

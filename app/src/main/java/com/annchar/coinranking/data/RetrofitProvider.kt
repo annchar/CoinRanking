@@ -1,6 +1,8 @@
 package com.annchar.coinranking.data
 
 import com.annchar.coinranking.BuildConfig
+import com.annchar.coinranking.data.models.ApiException
+import com.annchar.coinranking.data.models.ApiExceptionBody
 import com.annchar.coinranking.data.models.ErrorJson
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
