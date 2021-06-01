@@ -36,8 +36,8 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding, CryptoListVie
 
     override fun init() {
         initView()
-        initAdapter()
         initObservers()
+        initAdapter()
         bindEvents()
     }
 
@@ -50,6 +50,12 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding, CryptoListVie
         // initial recyclerView
         binding.rcCryptoList.addItemDecoration(itemDecorator)
         binding.rcCryptoList.adapter = cryptoListAdapter
+    }
+
+    private fun initObservers() {
+        viewModel.cryptoList.observe(viewLifecycleOwner, {
+            cryptoListAdapter.submitData(this.lifecycle, it)
+        })
     }
 
     private fun initAdapter() {
@@ -83,12 +89,6 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding, CryptoListVie
                 showToastMessage(it.error.message.toString())
             }
         }
-    }
-
-    private fun initObservers() {
-        viewModel.cryptoList.observe(viewLifecycleOwner, {
-            cryptoListAdapter.submitData(this.lifecycle, it)
-        })
     }
 
     private fun bindEvents() {

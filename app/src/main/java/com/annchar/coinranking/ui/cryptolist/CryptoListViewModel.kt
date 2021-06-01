@@ -17,8 +17,15 @@ import com.annchar.coinranking.ui.models.CryptoItemResponse
 class CryptoListViewModel(private val repository: CryptoListRepository) : BaseViewModel() {
 
     private val _cryptoList: MutableLiveData<PagingData<CryptoItemResponse>> =
-        Pager(PagingConfig(pageSize = NETWORK_PAGE_SIZE)) { CryptoListPagingSource(repository) }.liveData
+        Pager(
+            config = PagingConfig(enablePlaceholders = false, pageSize = NETWORK_PAGE_SIZE),
+            pagingSourceFactory = {
+                CryptoListPagingSource(repository)
+            }
+        )
+            .liveData
             .cachedIn(viewModelScope)
             .let { it as MutableLiveData<PagingData<CryptoItemResponse>> }
+
     val cryptoList: LiveData<PagingData<CryptoItemResponse>> = _cryptoList
 }
