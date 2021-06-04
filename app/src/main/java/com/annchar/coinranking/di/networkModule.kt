@@ -1,6 +1,6 @@
 package com.annchar.coinranking.di
 
-import com.annchar.coinranking.data.RetrofitProvider
+import com.annchar.coinranking.data.providers.RetrofitProvider
 import org.koin.dsl.module
 
 private const val BASE_URL = "https://pro-api.coinmarketcap.com"

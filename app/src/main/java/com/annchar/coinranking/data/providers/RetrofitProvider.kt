@@ -1,4 +1,4 @@
-package com.annchar.coinranking.data
+package com.annchar.coinranking.data.providers
 
 import com.annchar.coinranking.BuildConfig
 import com.annchar.coinranking.data.models.ApiException

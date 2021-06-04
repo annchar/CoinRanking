@@ -2,12 +2,14 @@ package com.annchar.coinranking.ui.cryptolist
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.annchar.coinranking.R
 import com.annchar.coinranking.databinding.FragmentCryptoListBinding
 import com.annchar.coinranking.ui.base.BaseFragment
+import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -53,9 +55,11 @@ class CryptoListFragment : BaseFragment<FragmentCryptoListBinding, CryptoListVie
     }
 
     private fun initObservers() {
-        viewModel.cryptoList.observe(viewLifecycleOwner, {
-            cryptoListAdapter.submitData(this.lifecycle, it)
-        })
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.getCryptoList().observe(viewLifecycleOwner, {
+                cryptoListAdapter.submitData(lifecycle, it)
+            })
+        }
     }
 
     private fun initAdapter() {
