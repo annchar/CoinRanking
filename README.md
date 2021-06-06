@@ -1,7 +1,7 @@
 <h1 align="center">CoinRanking</h1> 
 
 <a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
-[![Medium](https://img.shields.io/badge/-Medium-000000?style=for-the-badge&logo=Medium&logoColor=white)](https://medium.com/@annchar)
+[![Medium](https://img.shields.io/badge/-Medium-000000?style=for-the-badge&logo=Medium&logoColor=white)](https://annchar.medium.com/android-paging-3-library-with-offset-and-limit-parameters-mvvm-livedata-and-coroutine-part1-5f85aa4fd29a)
 [![Github](https://img.shields.io/badge/-Github-000000?style=for-the-badge&logo=Github&logoColor=white)](https://github.com/annchar)
 
 <p align="center">  
@@ -50,7 +50,7 @@ CoinRanking is based on MVVM architecture and a repository pattern.
 ## Open API
 CoinRanking using the [Coinmarketcap API](https://coinmarketcap.com/api) for constructing RESTful API.<br>
 
-## How to run application
+<b>How to run application</b>
 - Register [Coinmarketcap API](https://coinmarketcap.com/api)
 - Open local.properties file
 - Add `api_key` line also add your api key like
@@ -58,8 +58,9 @@ CoinRanking using the [Coinmarketcap API](https://coinmarketcap.com/api) for con
 api_key = 10ce47bf-92fb-42a5-bc4c-93de83123Drf
 ~~~ 
 
-## In the future
-I will implement save data to storage by Room
+
+## Blog
+[Android Paging 3 library with Offset and Limit parameters, MVVM, LiveData, and Coroutine - Part1](https://annchar.medium.com/android-paging-3-library-with-offset-and-limit-parameters-mvvm-livedata-and-coroutine-part1-5f85aa4fd29a)
 
 # License
 ```xml
